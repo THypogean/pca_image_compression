@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        h1 {
+            position: absolute;
+            top: 70px;
+            font-family: SF Pro Display Regular, sans-serif;
+            font-size: 25px;
+        }
+
+        #app {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <div id="app">
+        <h1>Сжатие изображений Методом Главных Компонент</h1>
+        <img :src="a+'.png'" alt="">
+    </div>
+    <script>
+        const {
+            createApp
+        } = Vue
+        createApp({
+            data() {
+                return {
+                    a: 2,
+                    inverse: false,
+                    images: 50
+                }
+            },
+            methods: {
+                pca() {
+                    if (this.a == this.images || this.a == 1) {
+                        this.inverse = !this.inverse
+                    }
+                    if (this.a < this.images && !this.inverse) {
+                        this.a++
+                    }
+                    if (this.a > 0 && this.inverse) {
+                        this.a--
+                    }
+                }
+            },
+            created() {
+                setInterval(this.pca, 100)
+            },
+        }).mount('#app')
+    </script>
+
+</body>
+
+</html>
